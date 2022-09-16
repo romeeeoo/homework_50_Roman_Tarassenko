@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-sm6 col-lg-4"> {% if is_asleep == False %}
+            <img style="width: 300px;" class="avatar" src="{% static 'img/awake.jpg' %}" alt="awake">
+        {% else %}
+            <img style="width: 300px; class="avatar" src="{% static 'img/sleep.png' %}" alt="awake">
+        {% endif %}
+        </div>
+        <div class="col-md-3 col-sm4 col-lg-4">
+            <p>Name</p>
+            <p>{{ name }}</p>
+            <p>Age</p>
+            <p>{{ age }}</p>
+            <p>Mood Level</p>
+            <p>{{ mood }}</p>
+            <p>Satiety Level</p>
+            <p>{{ satiety }}</p>
+        </div>
+    </div>
+    <div>
+        <form method="POST" action="http://localhost:8000/cat_stats/">
+            {% csrf_token %}
+            <select name="action" id="action">
+                <option value="play">play</option>
+                <option value="feed">feed</option>
+                <option value="rest">rest</option>
+                <input type="submit" value="apply"/>
+            </select>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
